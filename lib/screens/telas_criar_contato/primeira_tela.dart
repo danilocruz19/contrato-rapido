@@ -53,6 +53,23 @@ class _PrimeiraTelaState extends State<PrimeiraTela> {
                 });
               },
             ),
+            DropdownButton(
+              items:
+                  providerCriarContrato.estados.map((item) {
+                    return DropdownMenuItem(child: Text(item), value: item);
+                  }).toList(),
+              onChanged: (valorNew) {
+                setState(() {
+                  providerCriarContrato.estadoSelecionado = valorNew!;
+                });
+              },
+              value:
+                  providerCriarContrato.estadoSelecionado.isEmpty
+                      ? null
+                      : providerCriarContrato.estadoSelecionado,
+              isExpanded: true,
+              hint: Text('Estados'),
+            ),
             SizedBox(height: 30),
             Align(
               alignment: Alignment.centerRight,

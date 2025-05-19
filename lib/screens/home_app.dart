@@ -29,7 +29,18 @@ class _HomeAppState extends State<HomeApp> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return AlertDialog(title: Text('Visualizar contratos'));
+                  return AlertDialog(
+                    title: Text('Visualizar contratos'),
+                    content: Column(
+                      children: [
+                        SwitchListTile(
+                          title: Text('Modo noturno'),
+                          value: providerCriarContrato.valorTema,
+                          onChanged: providerCriarContrato.mudarTema
+                        ),
+                      ],
+                    ),
+                  );
                 },
               );
             },
@@ -101,11 +112,13 @@ class _HomeAppState extends State<HomeApp> {
               ),
               SizedBox(width: 15),
               ElevatedButton(
-                onPressed:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CriarContrato()),
-                    ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CriarContrato()),
+                  );
+                  providerCriarContrato.consumirApi();
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 48, 96, 136),
                   shape: RoundedRectangleBorder(
